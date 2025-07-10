@@ -109,4 +109,11 @@ export class ClockComponentComponent implements OnInit, OnDestroy {
     const newTime = new Date(clock.startTime.getTime() - 60000);
     this.clockService.updateClock(clock.id, { startTime: newTime });
   }
+  getNumberTransform(index: number): string {
+    const angle = index * 30; // 30 grados por cada número (360/12)
+    const radius = 80; // Radio desde el centro
+    const x = Math.sin(angle * Math.PI / 180) * radius;
+    const y = -Math.cos(angle * Math.PI / 180) * radius;
+    return `translate(${x}px, ${y}px)`;
+  }
 }

@@ -1,1 +1,411 @@
-/* You can add global styles to this file, and also import other style files */
+// Importar fuentes de Google (opcional)
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+// Variables de colores modernos
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+  --shadow-medium: 0 15px 35px rgba(31, 38, 135, 0.2);
+  --shadow-heavy: 0 25px 50px rgba(31, 38, 135, 0.3);
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-light: #ffffff;
+  --border-radius: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Reset y configuración base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--primary-gradient);
+  min-height: 100vh;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  
+  // Partículas animadas de fondo
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.06)"/><circle cx="90" cy="90" r="2.5" fill="rgba(255,255,255,0.04)"/><circle cx="10" cy="60" r="1.2" fill="rgba(255,255,255,0.07)"/></svg>');
+    background-size: 200px 200px;
+    animation: float 20s infinite linear;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
+// Contenedor principal
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  align-items: center;
+  gap: 2rem;
+}
+
+// Estilos para botones personalizados
+button, .btn {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  padding: 1rem 2rem;
+  color: var(--text-light);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  box-shadow: var(--shadow-light);
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  outline: none;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    background: rgba(255, 255, 255, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.3);
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  // Variantes de botones
+  &.btn-primary {
+    background: var(--accent-gradient);
+    border: none;
+    color: white;
+    
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
+  
+  &.btn-secondary {
+    background: var(--secondary-gradient);
+    border: none;
+    color: white;
+    
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
+  
+  &.btn-outline {
+    background: transparent;
+    border: 2px solid var(--glass-border);
+    color: var(--text-light);
+    
+    &:hover {
+      background: var(--glass-bg);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+  
+  &.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 12px;
+  }
+  
+  &.btn-large {
+    padding: 1.5rem 3rem;
+    font-size: 1.1rem;
+    border-radius: 25px;
+  }
+}
+
+// Estilos para iconos (reemplaza mat-icon)
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  
+  &.icon-small {
+    width: 1rem;
+    height: 1rem;
+    font-size: 1rem;
+  }
+  
+  &.icon-large {
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+  }
+  
+  &.icon-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    padding: 0.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+  }
+}
+
+// Estilos para el componente del reloj
+app-clock-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  
+  // Contenedor del reloj
+  .clock-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition);
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-heavy);
+    }
+  }
+  
+  // Reloj circular
+  .clock-face {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
+    border: 8px solid var(--glass-border);
+    box-shadow: 
+      inset 0 0 30px rgba(0, 0, 0, 0.1),
+      0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: 1rem auto;
+    
+    // Números del reloj
+    .clock-number {
+      position: absolute;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    // Manecillas
+    .clock-hand {
+      position: absolute;
+      transform-origin: bottom center;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      transition: var(--transition);
+      
+      &.hour-hand {
+        width: 6px;
+        height: 80px;
+        background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+        left: 50%;
+        bottom: 50%;
+        margin-left: -3px;
+      }
+      
+      &.minute-hand {
+        width: 4px;
+        height: 110px;
+        background: linear-gradient(180deg, #2980b9 0%, #3498db 100%);
+        left: 50%;
+        bottom: 50%;
+        margin-left: -2px;
+      }
+      
+      &.second-hand {
+        width: 2px;
+        height: 120px;
+        background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+        left: 50%;
+        bottom: 50%;
+        margin-left: -1px;
+      }
+    }
+    
+    // Centro del reloj
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #2c3e50 0%, #34495e 100%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+  }
+  
+  // Display digital
+  .digital-display {
+    background: var(--dark-gradient);
+    color: var(--text-light);
+    padding: 1rem 2rem;
+    border-radius: 15px;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--glass-border);
+    min-width: 200px;
+    
+    .time-display {
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 10px rgba(79, 172, 254, 0.5);
+    }
+  }
+  
+  // Controles
+  .clock-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      padding: 0.5rem 1rem;
+      color: var(--text-light);
+      font-weight: 500;
+      
+      label {
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+      }
+      
+      .icon-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--text-light);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
+
+// Animaciones adicionales
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Aplicar animaciones
+.animate-fade-in {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  app-root {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .clock-face {
+    width: 250px !important;
+    height: 250px !important;
+  }
+  
+  .digital-display {
+    font-size: 1.5rem !important;
+  }
+  
+  .clock-controls {
+    flex-direction: column;
+    width: 100%;
+    
+    .control-group {
+      justify-content: space-between;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .clock-face {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  button, .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
